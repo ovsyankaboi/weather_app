@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Прогноз погоды</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="icon" href="./assets/clear.png" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar__title">
+        <h1 class="h1">Прогноз погоды</h1>
+      </div>
+
+      <div class="topbar__actions">
+        <button class="btn btn--ghost" id="refreshBtn" type="button" aria-label="Обновить прогноз">
+          Обновить
+        </button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="card setup" id="setup" hidden>
+        <h2 class="h2">Выберите локацию</h2>
+        <p class="muted">
+          Если вы запретили доступ — добавьте город вручную.
+        </p>
+
+        <div class="setup__row">
+          <button class="btn" id="geoBtn" type="button">Использовать геопозицию</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <form class="form" id="primaryCityForm" autocomplete="off" novalidate>
+          <label class="label" for="primaryCityInput">Город</label>
+          <div class="input-wrap">
+            <input class="input" id="primaryCityInput" name="city" type="text" placeholder="Начните вводить город" />
+            <ul class="suggestions" id="primarySuggestions" aria-label="Подсказки городов"></ul>
+          </div>
+          <p class="field-error" id="primaryCityError" role="alert" aria-live="polite"></p>
+          <button class="btn" type="submit">Сохранить</button>
+        </form>
+      </section>
+
+      <section class="sidebar" id="sidebar" hidden>
+        <div class="card sidebar__card">
+          <div class="sidebar__head">
+            <h2 class="h2">Локации</h2>
+            <span class="pill" id="locationsCount">0/3</span>
+          </div>
+
+          <nav class="locations" aria-label="Список локаций">
+            <ul class="locations__list" id="locationsList"></ul>
+          </nav>
+
+          <div class="divider"></div>
+
+          <form class="form" id="addCityForm" autocomplete="off" novalidate>
+            <label class="label" for="addCityInput">Добавить город</label>
+            <div class="input-wrap">
+              <input class="input" id="addCityInput" name="city" type="text" placeholder="Например: Amsterdam" />
+              <ul class="suggestions" id="addSuggestions" aria-label="Подсказки городов"></ul>
+            </div>
+            <p class="field-error" id="addCityError" role="alert" aria-live="polite"></p>
+            <button class="btn btn--secondary" type="submit">Добавить</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="content" id="content" hidden>
+        <div class="card">
+          <div class="status" id="status" aria-live="polite"></div>
+
+          <section class="current" id="current" aria-label="Текущая погода" hidden></section>
+
+          <section class="forecast" aria-label="Прогноз на 3 дня" id="forecast" hidden>
+            <h2 class="h2">Прогноз</h2>
+            <div class="forecast__grid" id="forecastGrid"></div>
+          </section>
+
+          <section class="notfound" id="notfound" hidden>
+            <img class="notfound__img" src="./assets/404.png" alt="Не найдено" />
+            <h2 class="h2">Не удалось получить прогноз</h2>
+            <p class="muted" id="notfoundText">Проверьте подключение к интернету или попробуйте другой город.</p>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer"></footer>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
